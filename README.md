@@ -27,9 +27,9 @@ Please be sure you have the following in your package.json:
 
 Pleas be sure you have the requirements mentioned in the previous section installed.
 
-We recommending forking this repository and using as a submodule. To use as a git submodule in your project, navigate to your containers directory and run:
+We recommending forking this repository and using as a submodule. To use as a git submodule in your project, navigate to your component directory and run:
 
-    git submodule add git@github.com:source4societyorg/react-form-component.git
+    git submodule add git@github.com:source4societyorg/react-form-component.git Form
 
 Replace the url with the url of your fork as needed.
 

@@ -6,66 +6,71 @@ import Input from './Input';
 import TextArea from './TextArea';
 import Select from './Select';
 import DatePicker from './DatePicker';
+import FieldBlock from './FieldBlock';
+import LabelBlock from './LabelBlock';
+import ValidationMessage from './ValidationMessage';
+import FieldContainer from './FieldContainer';
 
-const FieldBlock = styled.div`
-	display: ${(props) => props.layout};
-    margin-left: ${(props) => (props.layout === 'inline-block' ? '5px' : '0px')};
-    Input, Select, TextArea {
-        width: 100%;
-    }
-`;
+const renderLabel = (id, {
+    layout: layout,
+    labelText: labelText,
+    hideLabel: hideLabel, 
+}) => ( 
+  hideLabel ? null :
+    <LabelBlock className={'field_label ' + id + '_label'} layout={layout}>
+        <Label text={labelText} />
+    </LabelBlock> 
+);
 
-const LabelBlock = styled.div`
-    padding-top: 7px;
-    display: ${(props) => props.layout}
-`;
-
-const FieldContainer = styled.div`
-`;
-
-const ValidationMessage = styled.div`   
-    span {
-        display: ${props => props.isVisible ? 'inline' : 'none'};
-        color: ${props => props.errorColor};
-    }
-`;
-
-
-export default function Field({
-    id: id,
+const renderFieldBlock = (id, {
+    layout: layout,
     fieldType: fieldType, 
-    layout: layout, 
-    labelText: labelText, 
     children: children,
     options: options, 
     onChange: onChange,
     isValid: isValid,
-    errorColor: errorColor,
-    value: value,
-    validationMessage: validationMessage,
+    value: value,     
+    ...props
+}) => (
+  <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
+    {fieldType === 'select' ? (
+      <Select value={value} onChange={onChange} isValid={isValid} options={options} {...props}>        
+      </Select>      
+    ) : fieldType === 'button' ? (
+      <button id={id} name={id} {...props}>
+        {children}
+      </button>
+    ) : fieldType === 'textarea' ? (
+      <textarea {...props}>
+        {children}
+      </textarea>
+    ) : fieldType === 'datepicker' ? (
+      <DatePicker value={value} onChange={onChange} isValid={isValid} {...props} />
+    ) : (
+      <Input fieldType={fieldType} value={value} onChange={onChange} isValid={isValid} {...props} />
+    )}
+  </FieldBlock>
+);
+
+const renderValidationMessage = (id, {
+  isValid: isValid,
+  errorColor: errorColor,
+  validationMessage: validationMessage,
+  ...props,
+}) => (
+    <ValidationMessage className={'validation ' + id + '_validation'} isVisible={!isValid} errorColor={errorColor}><span>{validationMessage}</span></ValidationMessage>
+);
+
+export default function Field({
+    id: id,
     ...props
   }) {
 
   return (
     <FieldContainer className={'field-container ' + id + '_container'}>
-      <LabelBlock layout={layout}>
-        <Label text={labelText} />
-      </LabelBlock>
-      <FieldBlock layout={layout}>
-        {fieldType === 'select' ? (
-          <Select value={value} onChange={onChange} isValid={isValid} options={options} {...props}>        
-          </Select>      
-        ) : fieldType === 'textarea' ? (
-          <textarea {...props}>
-            {children}
-          </textarea>
-        ) : fieldType === 'datepicker' ? (
-          <DatePicker value={value} onChange={onChange} isValid={isValid} {...props} />
-        ) : (
-          <Input fieldType={fieldType} value={value} onChange={onChange} isValid={isValid} {...props} />
-        )}
-      </FieldBlock>
-      <ValidationMessage isVisible={!isValid} errorColor={errorColor}><span>{validationMessage}</span></ValidationMessage>
+      {renderLabel(id, props)}
+      {renderFieldBlock(id, props)}
+      {renderValidationMessage(id, props)}
     </FieldContainer>
   );
 }
@@ -77,7 +82,8 @@ Field.defaultProps = {
   layout: 'block',
   isValid: true,
   validationMessage: '',
-  errorColor: '#cc0000'
+  errorColor: '#cc0000',
+  hideLabel: false,
 };
 
 Field.propTypes = {
@@ -90,4 +96,5 @@ Field.propTypes = {
   errorColor: PropTypes.string,
   onChange: PropTypes.func,
   options: PropTypes.object,
+  hideLabel: PropTypes.bool,
 };

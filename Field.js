@@ -5,7 +5,7 @@ import Label from '../Label';
 import Input from './Input';
 import TextArea from './TextArea';
 import Select from './Select';
-import Datepicker from './DatePicker';
+import DatePicker from './DatePicker';
 
 const FieldBlock = styled.div`
 	display: ${(props) => props.layout};
@@ -31,28 +31,41 @@ const ValidationMessage = styled.div`
 `;
 
 
-export default function Field(props) {
+export default function Field({
+    id: id,
+    fieldType: fieldType, 
+    layout: layout, 
+    labelText: labelText, 
+    children: children,
+    options: options, 
+    onChange: onChange,
+    isValid: isValid,
+    errorColor: errorColor,
+    value: value,
+    validationMessage: validationMessage,
+    ...props
+  }) {
+
   return (
-    <FieldContainer className="field-container">
-      <LabelBlock layout={props.layout}>
-        <Label text={props.labelText} />
+    <FieldContainer className={'field-container ' + id + '_container'}>
+      <LabelBlock layout={layout}>
+        <Label text={labelText} />
       </LabelBlock>
-      <FieldBlock layout={props.layout}>
-        {props.fieldType === 'select' ? (
-          <Select>
-            {props.children}
+      <FieldBlock layout={layout}>
+        {fieldType === 'select' ? (
+          <Select value={value} onChange={onChange} isValid={isValid} options={options} {...props}>        
           </Select>      
-        ) : props.fieldType === 'textarea' ? (
-          <TextArea>
-            {props.children}
-          </TextArea>
-        ) : props.fieldType === 'datepicker' ? (
-          <Datepicker />
+        ) : fieldType === 'textarea' ? (
+          <textarea {...props}>
+            {children}
+          </textarea>
+        ) : fieldType === 'datepicker' ? (
+          <DatePicker value={value} onChange={onChange} isValid={isValid} {...props} />
         ) : (
-          <Input fieldType={props.fieldType} value={props.value} onChange={props.onChange} isValid={props.isValid} />
+          <Input fieldType={fieldType} value={value} onChange={onChange} isValid={isValid} {...props} />
         )}
       </FieldBlock>
-      <ValidationMessage isVisible={!props.isValid} errorColor={props.errorColor}><span>{props.validationMessage}</span></ValidationMessage>
+      <ValidationMessage isVisible={!isValid} errorColor={errorColor}><span>{validationMessage}</span></ValidationMessage>
     </FieldContainer>
   );
 }
@@ -75,5 +88,6 @@ Field.propTypes = {
   isValid: PropTypes.bool,
   validationMessage: PropTypes.string,
   errorColor: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  options: PropTypes.object,
 };

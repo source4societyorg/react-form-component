@@ -1,16 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const SelectStyle = styled.select`
-	background-color: #F4F4F4;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-`;
+const Select = ({value: value, isValid: isValid, onChange: onChange, options:options, ...props}) => (
+    <select {...props} onChange={onChange} defaultValue={value}>
+      {renderOptions(options.toJS(), value)}
+    </select>
+);
 
-export default function Input(props) {
-  return (
-    <SelectStyle>
-      {props.children}
-    </SelectStyle>
-  );
-}
+const renderOptions = (options, value) => (
+    options.map( option =>
+        <option value={option.value} key={option.value}>{option.label}</option>
+    )
+);
+
+export default Select;

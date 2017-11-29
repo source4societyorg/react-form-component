@@ -8,9 +8,15 @@ const InputStyle = styled.input`
     color: black;
 `;
 
-export default function Input(props) {
+export default function Input({
+    fieldType: fieldType,
+    onChange: onChange,
+    isValid: isValid,
+    errorColor: errorColor,
+    ...props
+  }) {
   return (
-    <InputStyle type={props.fieldType} value={props.value} onChange={props.onChange} isValid={props.isValid} errorColor={props.errorColor} />
+    <InputStyle type={fieldType} onChange={onChange} isValid={isValid} errorColor={errorColor} {...props} />
   )
 }
 

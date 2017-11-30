@@ -29,13 +29,16 @@ const renderFieldBlock = (id, {
     options: options, 
     onChange: onChange,
     isValid: isValid,
-    value: value,     
+    value: value,  
+    labelText: labelText,
+    hideLabel: hideLabel,  
+    errorColor: errorColor,
+    validationMessage: validationMessage,
     ...props
 }) => (
   <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
     {fieldType === 'select' ? (
-      <Select value={value} onChange={onChange} isValid={isValid} options={options} {...props}>        
-      </Select>      
+      <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} {...props} />    
     ) : fieldType === 'button' ? (
       <button id={id} name={id} {...props}>
         {children}
@@ -45,9 +48,9 @@ const renderFieldBlock = (id, {
         {children}
       </textarea>
     ) : fieldType === 'datepicker' ? (
-      <DatePicker value={value} onChange={onChange} isValid={isValid} {...props} />
+      <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     ) : (
-      <Input fieldType={fieldType} value={value} onChange={onChange} isValid={isValid} {...props} />
+      <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     )}
   </FieldBlock>
 );

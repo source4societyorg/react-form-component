@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Select = ({value: value, isValid: isValid, onChange: onChange, options:options, ...props}) => (
+const Select = ({value: value, isValid: isValid, errorColor: errorColor, onChange: onChange, options:options, ...props}) => (
     <select {...props} onChange={onChange} defaultValue={value}>
       {renderOptions(options.toJS(), value)}
     </select>

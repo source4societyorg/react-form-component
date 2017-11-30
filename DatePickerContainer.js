@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const DatePickerContainer = styled.div`
-  input {
+  input:not(type=checkbox) {
       display: inline-block;
       vertical-align: middle; 
   }

@@ -39,6 +39,8 @@ const renderFieldBlock = (id, {
   <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
     {fieldType === 'select' ? (
       <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} {...props} />    
+    ) : fieldType === 'divider' ? (
+      <Label text={props.text} className={'divider_label ' + id + '_divider_label'} />
     ) : fieldType === 'button' ? (
       <button id={id} name={id} {...props}>
         {children}

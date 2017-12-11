@@ -48,7 +48,7 @@ const renderFieldBlock = (id, {
     ) : fieldType === 'textarea' ? (
       <textarea {...props}>
         {children}
-      </textarea>
+      </textarea>  
     ) : fieldType === 'datepicker' ? (
       <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     ) : (

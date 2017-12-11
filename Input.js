@@ -15,8 +15,9 @@ export default function Input({
     errorColor: errorColor,
     ...props
   }) {
+
   return (
-    <InputStyle type={fieldType} onChange={onChange} isValid={isValid} errorColor={errorColor} {...props} />
+    <InputStyle type={fieldType} onChange={onChange} isValid={isValid} errorColor={errorColor} checked={props.fieldData.get('checked',false)} {...props} />
   )
 }
 

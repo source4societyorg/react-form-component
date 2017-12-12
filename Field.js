@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Label from '../Label';
 import Input from './Input';
 import TextArea from './TextArea';
 import Select from './Select';
@@ -18,7 +17,7 @@ const renderLabel = (id, {
 }) => ( 
   hideLabel ? null :
     <LabelBlock className={'field_label ' + id + '_label'} layout={layout}>
-        <Label text={labelText} />
+        <label className={'label_' + id}>{labelText}</label>
     </LabelBlock> 
 );
 

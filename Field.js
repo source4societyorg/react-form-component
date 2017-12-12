@@ -34,12 +34,12 @@ const renderFieldBlock = (id, {
     errorColor: errorColor,
     validationMessage: validationMessage,
     ...props
-}) => (
+}) => { console.log(fieldType); return (
   <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
     {fieldType === 'select' ? (
       <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} {...props} />    
     ) : fieldType === 'divider' ? (
-      <Label text={props.text} className={'divider_label ' + id + '_divider_label'} />
+      <label className={'divider_label ' + id + '_divider_label'}>{props.text}</label>
     ) : fieldType === 'button' ? (
       <button id={id} name={id} {...props}>
         {children}
@@ -54,7 +54,7 @@ const renderFieldBlock = (id, {
       <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     )}
   </FieldBlock>
-);
+)};
 
 const renderValidationMessage = (id, {
   isValid: isValid,

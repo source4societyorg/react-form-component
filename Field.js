@@ -34,7 +34,7 @@ const renderFieldBlock = (id, {
     errorColor: errorColor,
     validationMessage: validationMessage,
     ...props
-}) => { console.log(fieldType); return (
+}) => (
   <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
     {fieldType === 'select' ? (
       <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} {...props} />    
@@ -54,7 +54,7 @@ const renderFieldBlock = (id, {
       <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     )}
   </FieldBlock>
-)};
+);
 
 const renderValidationMessage = (id, {
   isValid: isValid,

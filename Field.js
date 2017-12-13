@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Label from '../Label';
 import Input from './Input';
 import TextArea from './TextArea';
 import Select from './Select';
@@ -18,7 +17,7 @@ const renderLabel = (id, {
 }) => ( 
   hideLabel ? null :
     <LabelBlock className={'field_label ' + id + '_label'} layout={layout}>
-        <Label text={labelText} />
+        <label className={'label_' + id}>{labelText}</label>
     </LabelBlock> 
 );
 
@@ -40,7 +39,7 @@ const renderFieldBlock = (id, {
     {fieldType === 'select' ? (
       <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} {...props} />    
     ) : fieldType === 'divider' ? (
-      <Label text={props.text} className={'divider_label ' + id + '_divider_label'} />
+      <label className={'divider_label ' + id + '_divider_label'}>{props.text}</label>
     ) : fieldType === 'button' ? (
       <button id={id} name={id} {...props}>
         {children}

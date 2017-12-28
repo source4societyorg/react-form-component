@@ -30,7 +30,6 @@ Input.defaultProps = {
 
 Input.propTypes = {
   fieldType: PropTypes.string.isRequired,
-  value: PropTypes.string,
   isValid: PropTypes.bool.isRequired,
   errorColor: PropTypes.string,
   onChange: PropTypes.func 

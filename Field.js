@@ -90,7 +90,6 @@ Field.defaultProps = {
 
 Field.propTypes = {
   labelText: PropTypes.string,
-  value: PropTypes.string,
   fieldType: PropTypes.string,
   layout: PropTypes.string,
   isValid: PropTypes.bool,

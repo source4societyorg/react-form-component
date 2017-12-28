@@ -69,7 +69,7 @@ export default function Field({
   }) {
 
   return (
-    <FieldContainer className={'field-container ' + id + '_container'}>
+    <FieldContainer className={'field-container ' + id + '_container ' + props.formLayout}>
       {renderLabel(id, props)}
       {renderFieldBlock(id, props)}
       {renderValidationMessage(id, props)}
@@ -86,6 +86,7 @@ Field.defaultProps = {
   validationMessage: '',
   errorColor: '#cc0000',
   hideLabel: false,
+  formLayout: 'vertical',
 };
 
 Field.propTypes = {

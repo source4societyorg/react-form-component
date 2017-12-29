@@ -33,6 +33,7 @@ const renderFieldBlock = (id, {
     hideLabel: hideLabel,  
     errorColor: errorColor,
     validationMessage: validationMessage,
+    formLayout: formLayout,
     ...props
 }) => (
   <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>

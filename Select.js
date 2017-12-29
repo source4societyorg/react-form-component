@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Select = ({value: value, isValid: isValid, fieldData: feldData, text: text, errorColor: errorColor, onChange: onChange, options:options, ...props}) =>{ console.log(value); return (
+const Select = ({value: value, isValid: isValid, fieldData: feldData, text: text, errorColor: errorColor, onChange: onChange, options:options, ...props}) => (
   <select {...props} onChange={onChange} value={value}>
+    <option value={''} key={''}>Select One</option>
     {renderOptions(options.toJS(), value)}
   </select>
-);}
+);
 
 const renderOptions = (options, value) => (
   options.map( option =>

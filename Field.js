@@ -9,6 +9,7 @@ import FieldBlock from './FieldBlock';
 import LabelBlock from './LabelBlock';
 import ValidationMessage from './ValidationMessage';
 import FieldContainer from './FieldContainer';
+import FileUpload from './FileUpload';
 
 const renderLabel = (id, {
     layout: layout,
@@ -50,6 +51,8 @@ const renderFieldBlock = (id, {
       <TextArea {...props} onChange={onChange} isValid={isValid} errorColor={errorColor} value={value} />        
     ) : fieldType === 'datepicker' ? (
       <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
+    ) : fieldType === 'fileUpload' ? (
+      <FileUpload value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />   
     ) : (
       <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
     )}

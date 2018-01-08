@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Select = ({value: value, isValid: isValid, fieldData: feldData, text: text, errorColor: errorColor, onChange: onChange, options:options, defaultOption: defaultOption,  ...props}) => (
-  <select {...props} onChange={onChange} value={value}>
+  <select onChange={onChange} value={value}>
     {renderDefaultOption(defaultOption)}
     {renderOptions(options.toJS(), value)}
   </select>
@@ -15,9 +15,11 @@ const renderDefaultOption = (defaultOption) => (
 ); 
 
 const renderOptions = (options, value) => (
-  options.map( option =>
-      <option value={option.value} key={option.value}>{option.label}</option>
-  )
+  options.length > 0 ?
+    options.map( option =>
+        <option value={option.value} key={option.value}>{option.label}</option>
+    )
+  : null
 );
 
 Select.defaultProps = {

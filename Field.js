@@ -37,27 +37,31 @@ const renderFieldBlock = (id, {
     formLayout: formLayout,
     defaultOption: defaultOption,
     ...props
-}) => (
-  <FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
-    {fieldType === 'select' ? (
-      <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} defaultOption={defaultOption} {...props} />    
-    ) : fieldType === 'divider' ? (
-      <label className={'divider_label ' + id + '_divider_label'}>{props.text}</label>
-    ) : fieldType === 'button' ? (
-      <button id={id} name={id} {...props}>
-        {children}
-      </button>
-    ) : fieldType === 'textarea' ? (
-      <TextArea {...props} onChange={onChange} isValid={isValid} errorColor={errorColor} value={value} />        
-    ) : fieldType === 'datepicker' ? (
-      <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
-    ) : fieldType === 'fileUpload' ? (
-      <FileUpload value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />   
-    ) : (
-      <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
-    )}
-  </FieldBlock>
-);
+}) => {
+  if( fieldType !== 'hidden' ) {
+    return (<FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
+      {fieldType === 'select' ? (
+        <Select value={value} errorColor={errorColor} onChange={onChange} isValid={isValid} options={options} defaultOption={defaultOption} {...props} />    
+      ) : fieldType === 'divider' ? (
+        <label className={'divider_label ' + id + '_divider_label'}>{props.text}</label>
+      ) : fieldType === 'button' ? (
+        <button id={id} name={id} {...props}>
+          {children}
+        </button>
+      ) : fieldType === 'textarea' ? (
+        <TextArea {...props} onChange={onChange} isValid={isValid} errorColor={errorColor} value={value} />        
+      ) : fieldType === 'datepicker' ? (
+        <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
+      ) : fieldType === 'fileUpload' ? (
+        <FileUpload value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />   
+      ) : (
+        <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
+      )}
+    </FieldBlock>)
+  } else {
+    return <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
+  }
+};
 
 const renderValidationMessage = (id, {
   isValid: isValid,
@@ -73,13 +77,17 @@ export default function Field({
     ...props
   }) {
 
-  return (
-    <FieldContainer className={'field-container ' + id + '_container ' + props.formLayout}>
-      {renderLabel(id, props)}
-      {renderFieldBlock(id, props)}
-      {renderValidationMessage(id, props)}
-    </FieldContainer>
-  );
+  if(props.fieldType !== 'hidden') {
+    return (
+      <FieldContainer className={'field-container ' + id + '_container ' + props.formLayout}>
+        {renderLabel(id, props)}
+        {renderFieldBlock(id, props)}
+        {renderValidationMessage(id, props)}
+      </FieldContainer>
+    )
+  } else {
+    return renderFieldBlock(id, props) 
+  }
 }
 
 Field.defaultProps = {

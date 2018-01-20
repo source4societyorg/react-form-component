@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Select = ({value: value, isValid: isValid, fieldData: feldData, text: text, errorColor: errorColor, onChange: onChange, options:options, defaultOption: defaultOption,  ...props}) => (
-  <select onChange={onChange} value={value}>
+  <select onChange={onChange} value={value} className={isValid ? 'valid' : 'invalid'}>
     {renderDefaultOption(defaultOption)}
     {renderOptions(options.toJS(), value)}
   </select>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextArea = ({onChange: onChange, value: value, className: className, ...props}) => (
-    <textarea value={value} onChange={onChange} className={className} />
+const TextArea = ({onChange: onChange, value: value, isValid: isValid, className: className, ...props}) => (
+    <textarea value={value} onChange={onChange} className={className + (isValid ? ' valid' : ' invalid')} />
 )
 
 TextArea.defaultProps = {

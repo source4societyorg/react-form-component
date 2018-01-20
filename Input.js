@@ -17,7 +17,7 @@ export default function Input({
   }) {
 
   return (
-    <InputStyle type={fieldType} onChange={onChange} isValid={isValid} errorColor={errorColor} checked={props.checked} {...props} />
+    <InputStyle type={fieldType} onChange={onChange} className={isValid ? 'valid' : 'invalid'} isValid={isValid} errorColor={errorColor} checked={props.checked} {...props} />
   )
 }
 

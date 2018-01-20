@@ -20,7 +20,9 @@ Please be sure you have the following in your package.json:
       "redux-saga": "0.15.3",
       "reselect": "3.0.1",
       "styled-components": "2.0.0",
-      "warning": "3.0.0"
+      "warning": "3.0.0",
+      "@source4society/scepter-utility-lib": "*",
+      "react-datepicker": "1.0.4"
     }
 
 ## Installation

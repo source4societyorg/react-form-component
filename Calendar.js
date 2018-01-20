@@ -6,8 +6,6 @@ import '!file-loader?name=[name].[ext]!../../images/calendar.jpg';
 const CalendarIcon = styled.img`
     width: 19px;
     cursor: pointer;
-    margin-left: 6px;
-    margin-right: 6px;
 `;
 
 const Calendar = (props) => (

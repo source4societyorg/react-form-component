@@ -17,10 +17,13 @@ const DatePicker = ({value: value, className: className, isValid: isValid, error
         selected={parsedValue ? parsedValue : undefined}
         className={'datepicker ' + (className)}     
         onChange={(date) => {
-          let timestamp = null
-          timestamp = date.unix().toString()
-          let evt = { target: { value: timestamp } };
-          onChange(evt) 
+          evt = { target: { value: undefined } }
+          if(!utlities.isEmpty(data)) {
+            let timestamp = null
+            timestamp = date.unix().toString()
+            evt.target.value = timestamp
+          } 
+          onChange(evt)
         }}   
         dateFormat={props.format || 'M/D/YY'} 
         />

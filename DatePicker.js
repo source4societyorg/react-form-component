@@ -17,8 +17,8 @@ const DatePicker = ({value: value, className: className, isValid: isValid, error
         selected={parsedValue ? parsedValue : undefined}
         className={'datepicker ' + (className)}     
         onChange={(date) => {
-          evt = { target: { value: undefined } }
-          if(!utlities.isEmpty(data)) {
+          let evt = { target: { value: undefined } }
+          if(!utilities.isEmpty(date)) {
             let timestamp = null
             timestamp = date.unix().toString()
             evt.target.value = timestamp

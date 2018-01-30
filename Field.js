@@ -1,15 +1,16 @@
+import utilities from '@source4society/scepter-utility-lib';
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './Input';
 import TextArea from './TextArea';
 import Select from './Select';
-import DatePicker from './DatePicker';
 import FieldBlock from './FieldBlock';
 import LabelBlock from './LabelBlock';
 import ValidationMessage from './ValidationMessage';
 import FieldContainer from './FieldContainer';
 import FileUpload from './FileUpload';
+import DatePicker from './DatePicker';
 
 const renderLabel = (id, {
     layout: layout,
@@ -36,8 +37,32 @@ const renderFieldBlock = (id, {
     validationMessage: validationMessage,
     formLayout: formLayout,
     defaultOption: defaultOption,
+    fieldOverride: fieldOverride,
     ...props
 }) => {
+  if( utilities.isNotEmpty(fieldOverride) ) {
+    let fieldComponent = fieldOverride({ 
+      id: id, 
+      fieldType: fieldType, 
+      layout: layout, 
+      children: children, 
+      options: options, 
+      onChange: onChange, 
+      isValid: isValid, 
+      value: value, 
+      labelText: labelText, 
+      hideLabel: hideLabel, 
+      errorColor: errorColor, 
+      validationMessage: validationMessage, 
+      formLayout: formLayout, 
+      defaultOption: defaultOption, 
+      ...props
+    });
+    if (utilities.isNotEmpty(fieldComponent)) {
+      return fieldComponent
+    }
+  }
+
   if( fieldType !== 'hidden' ) {
     return (<FieldBlock className={'field_block ' + id + '_field'} layout={layout}>
       {fieldType === 'select' ? (
@@ -50,11 +75,11 @@ const renderFieldBlock = (id, {
         </button>
       ) : fieldType === 'textarea' ? (
         <TextArea {...props} onChange={onChange} isValid={isValid} errorColor={errorColor} value={value} />        
-      ) : fieldType === 'datepicker' ? (
-        <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
       ) : fieldType === 'fileUpload' ? (
         <FileUpload value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />   
-      ) : (
+			) : fieldType === 'datepicker' ? (
+        <DatePicker value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
+      ) : (        
         <Input fieldType={fieldType} value={value} onChange={onChange} errorColor={errorColor} isValid={isValid} {...props} />
       )}
     </FieldBlock>)

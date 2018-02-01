@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const ValidationMessage = styled.div`   
     span {
-        display: ${props => props.isVisible ? 'inline' : 'none'};
-        color: ${props => props.errorColor};
+        display: ${(props) => props.isVisible ? 'inline' : 'none'};
+        color: ${(props) => props.errorColor};
     }
 `;
 

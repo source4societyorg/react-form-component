@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import '!file-loader?name=[name].[ext]!../../images/calendar.jpg';
 
 const CalendarIcon = styled.img`
@@ -8,8 +7,8 @@ const CalendarIcon = styled.img`
     cursor: pointer;
 `;
 
-const Calendar = (props) => (
-    <CalendarIcon src="/calendar.jpg" />
+const Calendar = () => (
+  <CalendarIcon src="/calendar.jpg" />
 );
 
 export default Calendar;

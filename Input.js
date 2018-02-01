@@ -9,28 +9,36 @@ const InputStyle = styled.input`
 `;
 
 export default function Input({
-    fieldType: fieldType,
-    onChange: onChange,
-    isValid: isValid,
-    errorColor: errorColor,
-    ...props
-  }) {
-
+  fieldType,
+  onChange,
+  isValid,
+  errorColor,
+  ...props
+}) {
   return (
-    <InputStyle type={fieldType} onChange={onChange} className={isValid ? 'valid' : 'invalid'} isValid={isValid} errorColor={errorColor} checked={props.checked} {...props} />
-  )
+    <InputStyle
+      type={fieldType}
+      onChange={onChange}
+      className={isValid ? 'valid' : 'invalid'}
+      isValid={isValid}
+      errorColor={errorColor}
+      checked={props.checked}
+      {...props}
+    />
+  );
 }
 
 Input.defaultProps = {
   fieldType: 'text',
   value: '',
   isValid: true,
-  errorColor: '#cc0000'
+  errorColor: '#cc0000',
 };
 
 Input.propTypes = {
   fieldType: PropTypes.string.isRequired,
   isValid: PropTypes.bool.isRequired,
   errorColor: PropTypes.string,
-  onChange: PropTypes.func 
-}
+  onChange: PropTypes.func,
+  checked: PropTypes.bool,
+};

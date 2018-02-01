@@ -9,35 +9,25 @@ const FileUploadStyle = styled.div`
 `;
 
 export default function FileUpload({
-    onChange: onChange,
-    isValid: isValid,
-    value: value,  
-    errorColor: errorColor,
-    validationMessage: validationMessage,
-    ...props
+    onChange,
   }) {
-  
   let inputRef = null;
 
   return (
     <FileUploadStyle className={'upload-widget'}>
-      <input type="file" ref={input => inputRef = input} onChange={onChange} className={'file-input'} />
-      <button onClick={ (evt) => { evt.preventDefault(); inputRef.click() } }>Upload</button>
+      <input type="file" ref={(input) => { inputRef = input; }} onChange={onChange} className={'file-input'} />
+      <button onClick={(evt) => { evt.preventDefault(); inputRef.click(); }}>Upload</button>
     </FileUploadStyle>
-  )
+  );
 }
 
 FileUpload.defaultProps = {
   fieldType: 'text',
   value: '',
   isValid: true,
-  errorColor: '#cc0000'
+  errorColor: '#cc0000',
 };
 
 FileUpload.propTypes = {
-  fieldType: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  isValid: PropTypes.bool.isRequired,
-  errorColor: PropTypes.string,
   onChange: PropTypes.func,
-}
+};

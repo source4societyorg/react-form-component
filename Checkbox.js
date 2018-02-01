@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Label from '../Label';
 
 const CheckboxContainer = styled.div``;
 const CheckboxStyle = styled.input``;
@@ -9,7 +8,7 @@ const CheckboxStyle = styled.input``;
 export default function Checkbox(props) {
   return (
     <CheckboxContainer>
-      <CheckboxStyle type="checkbox" value={props.value} /> <Label text={props.label} />
+      <CheckboxStyle type="checkbox" value={props.value} id={props.id} /> <label htmlFor={props.id}>{props.label}</label>
     </CheckboxContainer>
   );
 }
@@ -22,4 +21,5 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
   value: PropTypes.string,
   label: PropTypes.string,
+  id: PropTypes.string,
 };

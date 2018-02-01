@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Select = ({value: value, isValid: isValid, fieldData: feldData, text: text, errorColor: errorColor, onChange: onChange, options:options, defaultOption: defaultOption,  ...props}) => (
+const Select = ({ value, isValid, onChange, options, defaultOption }) => (
   <select onChange={onChange} value={value} className={isValid ? 'valid' : 'invalid'}>
     {renderDefaultOption(defaultOption)}
     {renderOptions(options.toJS(), value)}
@@ -12,12 +12,12 @@ const renderDefaultOption = (defaultOption) => (
   defaultOption !== false ?
     <option value={defaultOption.value} key={defaultOption.key}>{defaultOption.key}</option>
   : null
-); 
+);
 
-const renderOptions = (options, value) => (
+const renderOptions = (options) => (
   options.length > 0 ?
-    options.map( option =>
-        <option value={option.value} key={option.value}>{option.label}</option>
+    options.map((option) =>
+      <option value={option.value} key={option.value}>{option.label}</option>
     )
   : null
 );
@@ -28,6 +28,10 @@ Select.defaultProps = {
 
 Select.propTypes = {
   defaultOption: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-}
+  value: PropTypes.string,
+  isValid: PropTypes.bool,
+  onChange: PropTypes.func,
+  options: PropTypes.object,
+};
 
 export default Select;

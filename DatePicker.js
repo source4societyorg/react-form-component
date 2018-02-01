@@ -49,7 +49,7 @@ DatePicker.propTypes = {
   isValid: PropTypes.bool,
   errorColor: PropTypes.string,
   onChange: PropTypes.func,
-  utcOffset: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  utcOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   format: PropTypes.string,
 };
 
